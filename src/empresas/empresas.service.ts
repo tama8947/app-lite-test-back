@@ -20,7 +20,7 @@ export class EmpresasService {
 
   async findAll() {
     const res = await this.prismaService.empresas.findMany();
-    return {data: res};
+    return {result: res};
   }
 
   async findOne(id: Prisma.empresasWhereUniqueInput) {
@@ -32,7 +32,7 @@ export class EmpresasService {
       if (res == null) {
         return {mensaje: "Empresa no existe en la base de datos", id};
       } else {
-        return {data: res};
+        return {result: res};
       }
       
     } catch (error) {
