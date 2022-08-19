@@ -1,7 +1,6 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from 'src/prisma.service';
-
+import { HttpException, Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { PrismaService } from "src/prisma.service";
 
 @Injectable()
 export class EmpresasService {
@@ -10,31 +9,30 @@ export class EmpresasService {
   async create(empresa: Prisma.empresasCreateInput) {
     try {
       await this.prismaService.empresas.create({
-        data: empresa
+        data: empresa,
       });
     } catch (error) {
       throw new HttpException(`ERROR_CREANDO_EMPRESA > ${error}`, 403);
     }
-    return {mensaje: "Empresa creada con exito", empresa};
+    return { mensaje: "Empresa creada con exito", empresa };
   }
 
   async findAll() {
     const res = await this.prismaService.empresas.findMany();
-    return {result: res};
+    return { result: res };
   }
 
   async findOne(id: Prisma.empresasWhereUniqueInput) {
     try {
       const res = await this.prismaService.empresas.findUnique({
         // where: {id: `${id}`}
-        where: id
+        where: id,
       });
       if (res == null) {
-        return {mensaje: "Empresa no existe en la base de datos", id};
+        return { mensaje: "Empresa no existe en la base de datos", id };
       } else {
-        return {result: res};
+        return { result: res };
       }
-      
     } catch (error) {
       throw new HttpException(`ERROR_CONSULTANDO_EMPRESA > ${error}`, 403);
     }
