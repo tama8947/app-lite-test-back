@@ -4,6 +4,7 @@ Para el desarrollo del componente Backend de la prueba se hace uso de nest.js co
 
 Las librerias utilizadas para el desarrollo son:
 
+- Nest.Js (Framework para Node.js)
 - Docker (levantar base de datos local)
 - Pisma ORM (ORM para facilitar las consultas a la Base de Datos)
 
