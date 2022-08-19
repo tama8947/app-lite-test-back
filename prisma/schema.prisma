@@ -1,0 +1,33 @@
+datasource db {
+    url      = env("DATABASE_URL")
+    provider = "postgresql"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model empresas {
+    id             String          @id @default(cuid())
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @updatedAt
+    nombre_empresa String
+    direccion      String
+    num_documento  String
+    tipoDocumentos tipoDocumentos? @relation(fields: [tipo_documento], references: [id])
+    Telefono       String
+    tipo_documento String?
+
+    @@map(name: "t_empresas")
+}
+
+model tipoDocumentos {
+    id           String     @id @default(cuid())
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @updatedAt
+    nombre_corto String
+    nombre_largo String
+    empresas     empresas[]
+
+    @@map(name: "t_tipo_documentos")
+}
